@@ -1,7 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package com.mycompany.atividadepraticajava02;
 
 import java.util.ArrayList;
@@ -25,16 +25,13 @@ public class Principal {
         double valor = 0;
         boolean resposta;
         
-      /*System.out.println("*** Banco Online ***\n");
+      System.out.println("*** Banco Online ***\n");
         
-        System.out.println("Informe o numero da conta: ");
+        /*System.out.println("Informe o numero da conta: ");
         c.numero = scan.nextInt();
         
         System.out.println("\nInforme o nome do(a) titular da conta: ");
-        c.nome_titular = scan.next();
-        
-        System.out.println("\nInforme o saldo atual da conta:  ");
-        c.saldo = scan.nextDouble(); */
+        c.nome_titular = scan.next(); */
         
         System.out.println("""
             *** Menu de Selecao ***
@@ -52,25 +49,25 @@ public class Principal {
         opcao = scan.nextInt();
         
         while (opcao == 1 || opcao == 2 || opcao == 3 || opcao == 4){
-            
+            boolean respostaBusca = false;
             Iterator i = lista.iterator();
             
             switch (opcao){
                 case 1:
-                    
+                        c = new Conta();
                         System.out.println("\nInforme o nome do(a) titular da conta: ");
                         c.nome_titular = scan.next();
 
                         System.out.println("\nInforme o saldo atual da conta:  ");
                         c.saldo = scan.nextDouble();
-
-                        c.numero = contadorNumeroConta + 1;
+                        
+                        contadorNumeroConta++;
+                        c.numero = contadorNumeroConta;
                         System.out.println("\nO numero da sua conta e: " + c.numero);
 
                         lista.add(c); 
 
                         break;
-                    
                 case 2:
                         System.out.println("\nInforme o numero da conta: ");
                         numeroConsulta = scan.nextInt();
@@ -79,16 +76,17 @@ public class Principal {
                             c=(Conta)i.next();
                             
                             if (c.numero == numeroConsulta){
-                                System.out.println("\nO saldo atual da conta e: "+c.saldo);
-                            }
-                            else{
-                                System.out.println("\nNumero da conta incorreto!");
+                                System.out.println("\nO saldo da conta e: "+c.saldo);
+                                
+                                respostaBusca = true;
+                                break;
                             }
                         }
+                        if(!respostaBusca){
+                            System.out.println("Numero da conta esta incorreto!");
+                        }
                         break;
-                    
                 case 3:
-                    
                         System.out.println("\nInforme o numero da conta: ");
                         numeroConsulta = scan.nextInt();
 
@@ -96,9 +94,10 @@ public class Principal {
                             c=(Conta)i.next();
                             
                             if (c.numero == numeroConsulta){
-                                System.out.println("Informe o valor que deseja sacar da conta: ");
+                                System.out.println("Informe o valor que deseja sacar  : ");
                                 valor = scan.nextDouble();
                                 resposta = c.sacar(valor);
+                                respostaBusca = true;
                                 if(resposta){
                                     System.out.println("Saque realizado com sucesso!");
                                     System.out.println("\nO saldo atual da conta e: \n" + c.saldo);
@@ -109,25 +108,33 @@ public class Principal {
                     }
                     break;
                             }
-                            else{
-                                System.out.println("\nNumero da conta incorreto!");
-                            }
                         }
-                
-
-                       
+                        if(!respostaBusca){
+                            System.out.println("Numero da conta esta incorreto!");
+                        }
+                        
+                        break;
                 case 4:
-                
-                       System.out.println("Informe o valor que deseja depositar na conta: ");
-                       valor = scan.nextDouble();
-                       c.depositar(valor);
+                       System.out.println("Informe o numero da conta: ");
+                       numeroConsulta = scan.nextInt();
                        
-                       break;
-                       
+                       while(i.hasNext()){
+                            c=(Conta)i.next();
+                            if (c.numero == numeroConsulta){
+                                System.out.println("Informe o valor que deseja depositar na conta: ");
+                                valor = scan.nextDouble();
+                                c.depositar(valor);
+                                System.out.println("\nO saldo atual da conta e: " + c.saldo);
+                                respostaBusca = true;
+                                break;
+                            }
+                       }
+                       if(!respostaBusca){
+                            System.out.println("Numero da conta esta incorreto!");
+                        }
+                        break;
                 default:
-                    
-                       break;
-                       
+                        break;
             }
             System.out.println("""
             *** Menu de Selecao ***
@@ -135,9 +142,11 @@ public class Principal {
               Informe a opcao desejada abaixo:
                            
                 
-              \n1 - Depositar
-              \n2 - Sacar
-              \n3 - Sair
+                \n1 - Criar conta
+                \n2 - Visualizar saldo
+                \n3 - Sacar
+                \n4 - Depositar
+                \n5 - Sair
                         
                            """);
             opcao = scan.nextInt();
