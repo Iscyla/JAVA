@@ -19,11 +19,11 @@ public class Principal {
         Scanner scan = new Scanner(System.in);
         ArrayList lista = new ArrayList();
         
-        Conta c = new Conta();
+        Conta_modificado c = new Conta_modificado();
         
         int opcao = 0, numeroConsulta = 0, contadorNumeroConta = 0;
         double valor = 0;
-        boolean resposta;
+        boolean resposta; 
         
       System.out.println("*** Banco Online ***\n");
         
@@ -54,7 +54,7 @@ public class Principal {
             
             switch (opcao){
                 case 1:
-                        c = new Conta();
+                        c = new Conta_modificado();
                         System.out.println("\nInforme o nome do(a) titular da conta: ");
                         c.nome_titular = scan.next();
 
@@ -73,7 +73,7 @@ public class Principal {
                         numeroConsulta = scan.nextInt();
 
                         while(i.hasNext()){
-                            c=(Conta)i.next();
+                            c=(Conta_modificado)i.next();
                             
                             if (c.numero == numeroConsulta){
                                 System.out.println("\nO saldo da conta e: "+c.saldo);
@@ -91,7 +91,7 @@ public class Principal {
                         numeroConsulta = scan.nextInt();
 
                         while(i.hasNext()){
-                            c=(Conta)i.next();
+                            c=(Conta_modificado)i.next();
                             
                             if (c.numero == numeroConsulta){
                                 System.out.println("Informe o valor que deseja sacar  : ");
@@ -119,7 +119,7 @@ public class Principal {
                        numeroConsulta = scan.nextInt();
                        
                        while(i.hasNext()){
-                            c=(Conta)i.next();
+                            c=(Conta_modificado)i.next();
                             if (c.numero == numeroConsulta){
                                 System.out.println("Informe o valor que deseja depositar na conta: ");
                                 valor = scan.nextDouble();
